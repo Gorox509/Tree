@@ -22,8 +22,8 @@ int tree_read(char *filename, Tree **tree) {
     int buf_len = make_buffer_for_reading(&buf, filename);
     if (buf_len == TREE_CANT_READ) return TREE_CANT_READ;
     read_file_to_buffer(buf, buf_len, fp);
-    int parsed = 0;
 
+    int parsed = 0;
     EXIT_ERR(tree_parse_node(buf, tree, &parsed))
     free(buf);
 
@@ -72,7 +72,7 @@ int tree_parse_data(char *buf, Tree **tree, int *parsed) {
     assert(parsed != NULL);
 
     int scanned = 0;
-    sscanf(buf + *parsed, "%[^()] %n", DATA(*tree), &scanned);
+    sscanf(buf + *parsed, "%[^()]%n", DATA(*tree), &scanned);
     *parsed += scanned;
     ON_READ_DEBUG(fprintf(stderr, "%s\n", DATA(*tree)));
 

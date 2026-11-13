@@ -19,10 +19,14 @@ typedef struct tree_node_t {
 #define RIGHT(tree) (tree)->right
 
 
-#define TREE_OK                 0
-#define TREE_NODE_ALLOC_FAILED  1
-#define TREE_CANT_READ          2
-#define TREE_READ_WRONG_SYNTAX  3
+#define TREE_OK                 (+0)
+#define TREE_NODE_ALLOC_FAILED  (-1)
+#define TREE_CANT_READ          (-2)
+#define TREE_READ_WRONG_SYNTAX  (-3)
+
+#define TREE_GRAPHVIZ_OK                    (+0)
+#define TREE_GRAPHVIZ_FAILED_TO_MAKE_DIR    (-1)
+#define TREE_GRAPHVIZ_FAILED_TO_OPEN_FILE   (-2)
 
 
 #define EXIT_ERR(...)  { int err = TREE_OK; if ((err = __VA_ARGS__) != TREE_OK) { tree_error_print(err); exit(err); } }
@@ -52,5 +56,7 @@ int tree_insert(Tree **tree, tree_elem_t val);
 void tree_print(FILE *fp, Tree *tree);
 void tree_write(char *filename, Tree *tree);
 int tree_read(char *filename, Tree **tree);
+
+int tree_to_graphviz(Tree *tree);
 
 #endif

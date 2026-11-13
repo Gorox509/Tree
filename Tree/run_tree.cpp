@@ -30,6 +30,8 @@ int do_program(int argc, char *argv[]) {
     tree_print(stdout, tree);
     tree_write(argv[2], tree);
 
+    tree_to_graphviz(tree);
+
     tree_free(tree);
 
     return 0;
