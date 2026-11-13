@@ -10,7 +10,10 @@ int tree_make_node(Tree **node) {
     if (new_node == NULL) {
         return TREE_NODE_ALLOC_FAILED;
     }
-    DATA(new_node) = {};
+    DATA(new_node) = data_type_alloc();
+    if (DATA(new_node) == NULL) {
+        return TREE_NODE_ALLOC_FAILED;
+    }
     LEFT(new_node) = NULL;
     RIGHT(new_node)= NULL;
 
