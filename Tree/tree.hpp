@@ -39,6 +39,11 @@ typedef struct tree_node_t {
 #define ON_READ_DEBUG(...)
 #endif
 
+#ifdef TREE_DEBUG
+#define ON_TREE_DEBUG(...) __VA_ARGS__
+#else
+#define ON_TREE_DEBUG(...)
+#endif
 
 
 
@@ -54,9 +59,11 @@ int tree_make_node(Tree **node);
 int tree_free(Tree *tree);
 int tree_insert(Tree **tree, tree_elem_t val);
 void tree_print(FILE *fp, Tree *tree);
-void tree_write(char *filename, Tree *tree);
-int tree_read(char *filename, Tree **tree);
+void tree_write(const char *filename, Tree *tree);
+int tree_read(const char *filename, Tree **tree);
 
 int tree_to_graphviz(Tree *tree);
+
+int run_akinator(int argc, char *argv[]);
 
 #endif

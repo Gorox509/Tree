@@ -4,14 +4,14 @@
 
 
 
-static int make_buffer_for_reading(char **buf, char *filename);
+static int make_buffer_for_reading(char **buf, const char *filename);
 static int read_file_to_buffer(char *buf, int buf_len, FILE *fp);
 static int tree_parse_node(char *buf, Tree **tree, int *parsed);
 static int tree_parse_data(char *buf, Tree **tree, int *parsed);
 
 
 
-int tree_read(char *filename, Tree **tree) {
+int tree_read(const char *filename, Tree **tree) {
     assert(filename != NULL);
     assert(tree != NULL);
 
@@ -22,6 +22,8 @@ int tree_read(char *filename, Tree **tree) {
     int buf_len = make_buffer_for_reading(&buf, filename);
     if (buf_len == TREE_CANT_READ) return TREE_CANT_READ;
     read_file_to_buffer(buf, buf_len, fp);
+
+    fclose(fp);
 
     int parsed = 0;
     EXIT_ERR(tree_parse_node(buf, tree, &parsed))
@@ -80,7 +82,7 @@ int tree_parse_data(char *buf, Tree **tree, int *parsed) {
 }
 
 
-int make_buffer_for_reading(char **buf, char *filename) {
+int make_buffer_for_reading(char **buf, const char *filename) {
     assert(buf != NULL);
     assert(filename != NULL);
 
@@ -89,7 +91,7 @@ int make_buffer_for_reading(char **buf, char *filename) {
 
     *buf = (char *) calloc((size_t) filestat.st_size + 1, sizeof(char));
     if (*buf == NULL) {
-        fprintf(stderr, "Error: buffer allocation failed");
+        ON_READ_DEBUG(fprintf(stderr, "Error: buffer allocation failed"));
         return TREE_CANT_READ;
     }
     (*buf)[filestat.st_size] = '\0';

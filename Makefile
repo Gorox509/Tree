@@ -16,9 +16,9 @@ CFLAGS=-ggdb3 -std=c++17 -Wall -Wextra -Weffc++ -Waggressive-loop-optimizations 
 DEFINES=
 
 
-all: make_tree.o tree.o run_tree.o tree_dump.o tree_to_graphviz.o read_tree.o
-	@$(CC) $(CFLAGS) $(DEFINES) make_tree.o tree.o run_tree.o tree_dump.o tree_to_graphviz.o read_tree.o -o tree.out
-	@rm -f make_tree.o tree.o run_tree.o tree_dump.o tree_to_graphviz.o read_tree.o
+all: make_tree.o tree.o run_tree.o tree_to_graphviz.o read_tree.o akinator.o
+	@$(CC) $(CFLAGS) $(DEFINES) make_tree.o tree.o run_tree.o tree_to_graphviz.o read_tree.o akinator.o -o tree.out
+	@rm -f make_tree.o tree.o run_tree.o tree_to_graphviz.o read_tree.o akinator.o
 
 make_tree.o:
 	@$(CC) $(CFLAGS) $(DEFINES) -c Tree/make_tree.cpp -o make_tree.o
@@ -29,11 +29,11 @@ tree.o:
 run_tree.o:
 	@$(CC) $(CFLAGS) $(DEFINES) -c Tree/run_tree.cpp -o run_tree.o
 
-tree_dump.o:
-	@$(CC) $(CFLAGS) $(DEFINES) -c Tree/tree_dump.cpp -o tree_dump.o
-
 tree_to_graphviz.o:
 	@$(CC) $(CFLAGS) $(DEFINES) -c Tree/tree_to_graphviz.cpp -o tree_to_graphviz.o
 
 read_tree.o:
 	@$(CC) $(CFLAGS) $(DEFINES) -c Tree/read_tree.cpp -o read_tree.o
+
+akinator.o:
+	@$(CC) $(CFLAGS) $(DEFINES) -c Tree/akinator.cpp -o akinator.o

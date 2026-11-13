@@ -94,7 +94,7 @@ void tree_print(FILE *fp, Tree *tree) {
 }
 
 
-void tree_write(char *filename, Tree *tree) {
+void tree_write(const char *filename, Tree *tree) {
     assert(filename != NULL);
 
     FILE *fp = safe_fopen(filename, "w");
@@ -110,7 +110,7 @@ FILE *safe_fopen(const char *filename, const char *mode) {
 
     FILE *fp = fopen(filename, mode);
         if (fp == NULL) {
-            fprintf(stderr, "Error: cannot open the file\n");
+            ON_TREE_DEBUG(fprintf(stderr, "Error: cannot open the file\n"));
             return NULL;
         }
     return fp;

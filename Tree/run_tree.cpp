@@ -6,7 +6,8 @@ static int do_program(int argc, char *argv[]);
 #include "tree.hpp"
 
 int main(int argc, char *argv[]) {
-    do_program(argc, argv);
+    //do_program(argc, argv);
+    run_akinator(argc, argv);
 
     return 0;
 }
